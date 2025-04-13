@@ -1,0 +1,57 @@
+name: main
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    outputs:
+      dep_hash: ${{ steps.dep_hash.outputs.DEP_HASH }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+          ssh-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.11.0'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Bump version in package.json
+        run: |
+          npm version patch --no-git-tag-version
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          git config --global user.email "mnpcmw6444@gmail.com"
+          git config --global user.name "GitHub Action"
+          git commit -am "CI/CD Version auto-increment to $NEW_VERSION [skip ci]"
+          git tag v$NEW_VERSION
+
+
+      - name: Set up Git with SSH for pushing
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ACTIONS_DEPLOY_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config user.name 'github-actions'
+          git config user.email 'github-actions@github.com'
+          git push git@github.com:${{ github.repository }} HEAD:${{ github.ref_name }}
+

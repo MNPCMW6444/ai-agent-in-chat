@@ -1,0 +1,9 @@
+{
+  "name": "@whatsapp-monitor/whatsapp-monitor",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "python monitor.py",
+    "install-deps": "pip install -r requirements.txt"
+  }
+} 

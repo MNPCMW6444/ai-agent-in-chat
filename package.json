@@ -1,0 +1,21 @@
+{
+  "name": "whatsapp-monitor-monorepo",
+  "version": "1.0.10",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "deploy": "cd apps/backend && npm run cdk deploy",
+    "dev": "npm run dev --workspaces"
+  },
+  "devDependencies": {
+    "nx": "^20.7.2",
+    "typescript": "~5.0.4"
+  },
+  "dependencies": {
+    "@nx/next": "^20.7.2"
+  }
+}

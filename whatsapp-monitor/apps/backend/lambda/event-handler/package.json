@@ -1,0 +1,17 @@
+{
+  "name": "event-handler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@types/aws-lambda": "^8.10.149",
+    "aws-sdk": "^2.1692.0"
+  }
+}

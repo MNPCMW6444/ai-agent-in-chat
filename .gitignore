@@ -1,0 +1,12 @@
+.idea
+.nx
+.vscode
+node_modules
+.DS_Store
+#package-lock.json
+.next
+__secrets
+cdk.out
+dist
+
+.early.coverage

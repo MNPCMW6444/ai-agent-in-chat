@@ -1,0 +1,31 @@
+{
+  "name": "@whatsapp-monitor/backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "whatsapp-monitor": "bin/whatsapp-monitor.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "deploy": "cdk deploy",
+    "deploy:ci": "cdk deploy CICDStack"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.3",
+    "@types/node": "^20.17.30",
+    "aws-cdk": "2.100.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "~5.0.4"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.100.0",
+    "constructs": "^10.2.69",
+    "source-map-support": "^0.5.21"
+  }
+}
